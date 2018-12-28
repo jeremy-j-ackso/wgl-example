@@ -1,0 +1,19 @@
+{
+  "name": "jeremy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "winston": "^3.1.0",
+    "winston-graylog2": "git@github.com:jeremy-j-ackso/winston-graylog2.git"
+  }
+}
