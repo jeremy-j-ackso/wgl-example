@@ -10,9 +10,12 @@ const options = {
       { host: 'localhost', port: 12201 }
     ],
   },
+  staticMeta: {
+    me: 'you',
+  },
 };
 
-winston.add(new winstonGraylog2(), options);
+winston.add(new winstonGraylog2(options));
 
 setInterval(() => {
   winston.info(`Time is ${(new Date).toLocaleString()}`);
