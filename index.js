@@ -1,5 +1,5 @@
 const winston = require('winston');
-const { format } = require('winston');
+const { format } = require('logform');
 const WinstonGraylog2 = require('winston-graylog2');
 
 const options = {
@@ -16,22 +16,6 @@ const options = {
   },
 };
 
-const duplicatingOldErrorHandler = format((info, opts) => {
-  let formatted = {};
-
-  if (info instanceof Error) {
-    // An error object is not 100% like a normal object, so
-    // we have to jump through hoops to get needed info out
-    // of error objects for logging.
-    formatted = Object.assign(formatted, info);
-    formatted.message = info.stack;
-  } else {
-    formatted = info;
-  }
-
-  return formatted;
-});
-
 const logger = winston.createLogger({
   level: 'debug',
   levels: {
@@ -45,8 +29,8 @@ const logger = winston.createLogger({
       debug: 7
   },
   format: format.combine(
-    duplicatingOldErrorHandler(),
-    format.json(),
+    format.errors({ stack: true }),
+    format.metadata(),
   ),
   transports: [new WinstonGraylog2(options)],
 });
@@ -56,5 +40,9 @@ setInterval(() => {
 }, 3000);
 
 setInterval(() => {
-  logger.error(new Error('FakeError'));
+  logger.info({ message: 'I should know the meaning of life', meaningOfLife: 42 });
+}, 3000);
+
+setInterval(() => {
+  logger.error({ message: new Error('FakeError'), meta: 'lolerror' });
 }, 3000);

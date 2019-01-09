@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "logform": "^2.1.0",
     "winston": "^3.1.0",
     "winston-graylog2": "git+ssh://git@github.com/jeremy-j-ackso/winston-graylog2.git"
   }
