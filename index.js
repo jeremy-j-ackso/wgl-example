@@ -40,6 +40,11 @@ setInterval(() => {
 }, 3000);
 
 setInterval(() => {
+  const x = { one: 1, two: 'two' };
+  logger.info(`Time is ${(new Date).toLocaleString()}`, x);
+}, 3000);
+
+setInterval(() => {
   logger.info({ message: 'I should know the meaning of life', meaningOfLife: 42 });
 }, 3000);
 
